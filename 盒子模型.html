@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            padding: 0px;
+            margin: 0px;
+        }
+        #box{
+            width: 200px;
+            height: 200px;
+            background: greenyellow;
+            border: 2px solid yellowgreen;
+            /* padding: 20px; */
+            position: relative;
+        }
+        #box1{
+            width: 80px;
+            height: 80px;
+            background: red;
+            border: 2px solid yellowgreen;
+            position: absolute;
+            position: relative;
+            top: 60px;
+            left: 60px;
+        }
+        #box2{
+            width: 40px;
+            height: 40px;
+            background: yellow;
+            border: 2px solid yellowgreen;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="box">
+        <div id="box1">
+            <div id="box2"></div>
+        </div>
+    </div>
+    <script>
+        const box = document.getElementById('box')
+        console.log(getComputedStyle(box).width) //获取样式表中的内容，元素隐藏也可以获取到。
+        console.log(box.clientWidth) //盒子可视的宽度（支持padding）
+        console.log(box.clientLeft) //边框的
+        console.log(box.offsetHeight) //支持padding和边框；
+        console.log(box1.offsetParent) // 查找父级
+        console.log(box1.offsetLeft) //定位父级到当前元素的距离（当前元素的左外边框到定位父级的左内边框的距离）
+        //scrollHeight //被内容撑开的高度,不算边框的
+       // scrollTop // 滚动条的距离
+
+        
+        class Too{
+            position(now){
+                let l = 0;
+                let cl = now.clientLeft;
+                //只要有当前这个元素就一直循环
+                while(now){
+                    l += (now.offsetLeft + now.clientLeft);
+                    now = now.offsetParent;//把本次的定位父级变成下次的循环的当前元素
+                }
+                l = l-cl
+                return l;
+            }
+            
+        }
+        let aa = new Too;
+        console.log(aa.position(box2))
+    </script>
+</body>
+</html>
